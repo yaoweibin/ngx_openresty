@@ -130,6 +130,16 @@ mv yaoweibin-memc-nginx-module-* memc-nginx-module-$ver || exit 1
 
 #################################
 
+ver=0.22
+$root/util/get-tarball "https://github.com/yaoweibin/nginx_syslog_patch/tarball/v$ver" -O nginx-syslog-patch-$ver.tar.gz || exit 1
+tar -xzf nginx-syslog-patch-$ver.tar.gz || exit 1
+mv yaoweibin-nginx_syslog_patch-* nginx-syslog-patch-$ver || exit 1
+cd nginx-$main_ver || exit 1
+patch -p1 < ../nginx-syslog-patch-$ver/syslog_1.0.6.patch || exit 1
+cd .. || exit 1
+
+#################################
+
 ver=0.13rc3
 $root/util/get-tarball "http://github.com/agentzh/srcache-nginx-module/tarball/v$ver" -O srcache-nginx-module-$ver.tar.gz || exit 1
 tar -xzf srcache-nginx-module-$ver.tar.gz || exit 1
